@@ -5,6 +5,7 @@ import prismadb from '@/lib/prismadb'
 import GithubProvider from "next-auth/providers/github"
 import GoogleProvider from "next-auth/providers/google"
 import {compare} from "bcrypt"
+import { PrismaAdapter } from "@next-auth/prisma-adapter";
 
 export default NextAuth({
     providers:[
@@ -59,6 +60,7 @@ export default NextAuth({
     session:{
         strategy:'jwt',
     },
+    adapter:PrismaAdapter(prismadb),
     jwt:{
         secret:process.env.NEXTAUTH_JWT_SECRET
     },
